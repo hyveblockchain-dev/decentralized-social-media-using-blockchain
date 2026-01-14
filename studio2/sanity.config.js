@@ -1,18 +1,14 @@
-import {defineConfig} from 'sanity'
-import {deskTool} from 'sanity/desk'
-import {visionTool} from '@sanity/vision'
-import {schemaTypes} from './schemas'
+import { defineConfig } from 'sanity'
+import { deskTool } from 'sanity/desk'
 
 export default defineConfig({
   name: 'default',
-  title: 'quadbug',
+  title: 'HyveConnect',
 
-  projectId: 'bogpqmqd',
-  dataset: 'production',
+  projectId: process.env.SANITY_STUDIO_PROJECT_ID!,
+  dataset: process.env.SANITY_STUDIO_DATASET!,
 
-  plugins: [deskTool(), visionTool()],
+  plugins: [deskTool()],
 
-  schema: {
-    types: schemaTypes,
-  },
+  basePath: '/',
 })
