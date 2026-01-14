@@ -74,28 +74,36 @@ export const TwitterProvider = ({ children }) => {
    * Creates an account in Sanity DB if the user does not already have one
    * @param {String} userAddress Wallet address of the currently logged in user
    */
-  const createUserAccount = async (userAddress = currentAccount) => {
-    if (!window.ethereum) return setAppStatus('noMetaMask')
-    try {
-      const userDoc = {
-        _type: 'users',
-        _id: userAddress,
-        name:'Unnamed',
-        isProfileImageNft: false,
-        profileImage:
-          'https://w1.pngwing.com/pngs/132/484/png-transparent-circle-silhouette-avatar-user-upload-pixel-art-user-profile-document-black.png',
-          coverImage:'https://2.bp.blogspot.com/-5vpY93ElH_k/VGGfooP0nCI/AAAAAAAAL9s/Am2HOXusRYM/s1600/Beautiful%2BFacebook%2BCover6.jpg',
-        walletAddress: userAddress,
-      }
-
-      await client.createIfNotExists(userDoc)
-
-      setAppStatus('connected')
-    } catch (error) {
-      router.push('/')
-      setAppStatus('error')
+const createUserAccount = async (userAddress = currentAccount) => {
+  try {
+    if (!window.ethereum) {
+      setAppStatus('noMetaMask')
+      return
     }
+
+    setAppStatus('loading')
+
+    const res = await fetch('/api/connect-wallet', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ address: userAddress }),
+    })
+
+    const data = await res.json()
+
+    if (!res.ok) {
+      console.error('POST /api/connect-wallet failed:', data)
+      setAppStatus('error')
+      return
+    }
+
+    setAppStatus('connected')
+  } catch (error) {
+    console.error('createUserAccount error:', error)
+    setAppStatus('error')
   }
+}
+
 
   /**
    * Generates NFT profile picture URL or returns the image URL if it's not an NFT
