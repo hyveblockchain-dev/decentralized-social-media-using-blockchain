@@ -1,5 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from "next";
-import { sanityServerClient } from "@/lib/sanity.server";
+import { sanityServerClient } from "../../lib/sanity.server";
 
 export default async function handler(
   req: NextApiRequest,
@@ -17,15 +17,16 @@ export default async function handler(
     }
 
     const doc = {
-      _type: "user",
+      _type: "users",
+      _id: address,
       walletAddress: address,
       createdAt: new Date().toISOString(),
     };
 
-    await sanityServerClient.create(doc);
+    await sanityServerClient.createIfNotExists(doc);
 
     return res.status(200).json({ success: true });
-  } catch (err: any) {
+  } catch (err) {
     console.error(err);
     return res.status(500).json({ error: "Sanity write failed" });
   }
