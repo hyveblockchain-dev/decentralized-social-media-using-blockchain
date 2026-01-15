@@ -1,31 +1,34 @@
 export default {
-  name: "post",
-  title: "Post",
+  name: "user",
+  title: "User",
   type: "document",
   fields: [
     {
-      name: "text",
-      title: "Text",
+      name: "walletAddress",
+      title: "Wallet Address",
       type: "string",
-      validation: (Rule) => Rule.required(),
-    },
-    {
-      name: "image",
-      title: "Image",
-      type: "image",
-      options: { hotspot: true },
-    },
-    {
-      name: "author",
-      title: "Author",
-      type: "reference",
-      to: [{ type: "user" }], // ✅ FIXED (was "users")
-    },
-    {
-      name: "createdAt",
-      title: "Created At",
-      type: "datetime",
       readOnly: true,
+    },
+    {
+      name: "name",
+      title: "Name",
+      type: "string",
+    },
+    {
+      name: "profileImage",
+      title: "Profile Image",
+      type: "image",
+      options: {
+        hotspot: true,
+      },
+    },
+    {
+      name: "coverImage",
+      title: "Cover Image",
+      type: "image",
+      options: {
+        hotspot: true,
+      },
     },
   ],
 };
