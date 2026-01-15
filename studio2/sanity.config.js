@@ -1,8 +1,8 @@
 import {defineConfig} from 'sanity'
 import {deskTool} from 'sanity/desk'
 
-// 👇 THIS IS THE CORRECT PATH BASED ON YOUR REPO
-import schemas from './schemas'
+// ✅ Import named export that we guaranteed exists
+import {schemaTypes} from './schemas'
 
 export default defineConfig({
   name: 'default',
@@ -14,6 +14,6 @@ export default defineConfig({
   plugins: [deskTool()],
 
   schema: {
-    types: schemas,
+    types: schemaTypes,
   },
 })
