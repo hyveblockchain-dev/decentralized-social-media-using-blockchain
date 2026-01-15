@@ -1,5 +1,5 @@
-import post from './postSchema'
-import tweet from './tweetSchema'
-import user from './userSchema'
+import post from "./postSchema";
+import tweets from "./tweetSchema";
+import user from "./userSchema";
 
-export const schemaTypes = [post, tweet, user]
+export default [post, tweets, user];
