@@ -7,29 +7,38 @@ export default {
       name: 'walletAddress',
       title: 'Wallet Address',
       type: 'string',
-      validation: (Rule) => Rule.required(),
     },
     {
       name: 'name',
       title: 'Name',
       type: 'string',
-      initialValue: 'Unnamed',
+    },
+    {
+      name: 'profileImage',
+      title: 'Profile Image',
+      type: 'string',
+    },
+    {
+      name: 'coverImage',
+      title: 'Cover Image',
+      type: 'string',
     },
     {
       name: 'isProfileImageNft',
       title: 'Is Profile Image NFT',
       type: 'boolean',
-      initialValue: false,
-    },
-    {
-      name: 'profileImage',
-      title: 'Profile Image',
-      type: 'url',
-    },
-    {
-      name: 'coverImage',
-      title: 'Cover Image',
-      type: 'url',
     },
   ],
+  preview: {
+    select: {
+      title: 'name',
+      subtitle: 'walletAddress',
+    },
+    prepare({ title, subtitle }) {
+      return {
+        title: title || 'Unnamed User',
+        subtitle,
+      }
+    },
+  },
 }
