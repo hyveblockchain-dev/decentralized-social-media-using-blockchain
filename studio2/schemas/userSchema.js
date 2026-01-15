@@ -1,51 +1,59 @@
 export default {
-  name: 'users',
-  title: 'User',
-  type: 'document',
+  name: "user",
+  title: "User",
+  type: "document",
   fields: [
-   {
-  name: 'createdAt',
-  title: 'Created At',
-  type: 'datetime',
-  readOnly: true,
-    },
     {
-      name: 'walletAddress',
-      title: 'Wallet Address',
-      type: 'string',
+      name: "createdAt",
+      title: "Created At",
+      type: "datetime",
       readOnly: true,
     },
     {
-      name: 'name',
-      title: 'Name',
-      type: 'string',
+      name: "walletAddress",
+      title: "Wallet Address",
+      type: "string",
+      readOnly: true,
     },
     {
-      name: 'profileImage',
-      title: 'Profile Image',
-      type: 'string',
+      name: "name",
+      title: "Name",
+      type: "string",
     },
+
+    // ✅ Profile picture upload (stored in Sanity)
     {
-      name: 'coverImage',
-      title: 'Cover Image',
-      type: 'string',
+      name: "profileImage",
+      title: "Profile Image",
+      type: "image",
+      options: {
+        hotspot: true, // allows cropping/focal point
+      },
     },
+
+    // ✅ Cover image upload (optional, but you already have a field)
     {
-      name: 'isProfileImageNft',
-      title: 'Is Profile Image NFT',
-      type: 'boolean',
+      name: "coverImage",
+      title: "Cover Image",
+      type: "image",
+      options: {
+        hotspot: true,
+      },
+    },
+
+    {
+      name: "isProfileImageNFT",
+      title: "Is Profile Image NFT",
+      type: "boolean",
+      initialValue: false,
+    },
+
+    // Optional: if NFT, store the NFT image/url here too
+    {
+      name: "profileImageUrl",
+      title: "Profile Image URL (NFT/IPFS/External)",
+      type: "url",
+      hidden: ({ document }) => !document?.isProfileImageNFT,
     },
   ],
-  preview: {
-    select: {
-      title: 'name',
-      subtitle: 'walletAddress',
-    },
-    prepare({ title, subtitle }) {
-      return {
-        title: title || 'Unnamed User',
-        subtitle,
-      }
-    },
-  },
-}
+};
