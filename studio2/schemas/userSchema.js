@@ -1,54 +1,35 @@
-export const userSchema = {
-    name: 'users',
-    type: 'document',
-    title: 'Users',
-    fields: [
-      {
-        name: 'name',
-        type: 'string',
-        title: 'Name',
-      },
-      {
-        name: 'walletAddress',
-        type: 'string',
-        title: 'Wallet Address',
-      },
-      {
-        name: 'profileImage',
-        type: 'string',
-        title: 'Profile Image',
-      },
-      {
-        name: 'postImage',
-        title: 'Post Image',
-        type: 'array',
-        of: [
-          {
-            type: 'reference',
-            to: [{ type: 'string' }],
-          },
-        ],
-      },
-      {
-        name: 'isProfileImageNft',
-        title: 'Is Profile Image NFT',
-        type: 'boolean',
-      },
-      {
-        name: 'coverImage',
-        type: 'string',
-        title: 'Cover Image',
-      },
-      {
-        name: 'tweets',
-        title: 'Tweets',
-        type: 'array',
-        of: [
-          {
-            type: 'reference',
-            to: [{ type: 'tweets' }],
-          },
-        ],
-      },
-    ],
-  }
+export default {
+  name: 'users',
+  title: 'User',
+  type: 'document',
+  fields: [
+    {
+      name: 'walletAddress',
+      title: 'Wallet Address',
+      type: 'string',
+      validation: (Rule) => Rule.required(),
+    },
+    {
+      name: 'name',
+      title: 'Name',
+      type: 'string',
+      initialValue: 'Unnamed',
+    },
+    {
+      name: 'isProfileImageNft',
+      title: 'Is Profile Image NFT',
+      type: 'boolean',
+      initialValue: false,
+    },
+    {
+      name: 'profileImage',
+      title: 'Profile Image',
+      type: 'url',
+    },
+    {
+      name: 'coverImage',
+      title: 'Cover Image',
+      type: 'url',
+    },
+  ],
+}
