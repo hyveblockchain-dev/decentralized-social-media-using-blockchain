@@ -7,6 +7,7 @@ export default {
       name: 'walletAddress',
       title: 'Wallet Address',
       type: 'string',
+      readOnly: true,
     },
     {
       name: 'name',
