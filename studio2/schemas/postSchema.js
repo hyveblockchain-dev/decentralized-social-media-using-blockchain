@@ -7,20 +7,20 @@ export default {
       name: 'text',
       title: 'Text',
       type: 'string',
-      validation: (Rule) => Rule.required().min(1).max(280),
+      validation: Rule => Rule.required().min(1).max(280),
     },
     {
       name: 'timestamp',
       title: 'Timestamp',
       type: 'datetime',
-      validation: (Rule) => Rule.required(),
+      validation: Rule => Rule.required(),
     },
     {
       name: 'author',
       title: 'Author',
       type: 'reference',
-      to: [{ type: 'user' }],
-      validation: (Rule) => Rule.required(),
+      to: [{ type: 'user' }], // 🔴 MUST be 'user'
+      validation: Rule => Rule.required(),
     },
   ],
 }
