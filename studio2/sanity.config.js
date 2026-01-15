@@ -1,21 +1,19 @@
-import { defineConfig } from 'sanity'
-import { deskTool } from 'sanity/desk'
+import {defineConfig} from 'sanity'
+import {deskTool} from 'sanity/desk'
 
-const projectId = process.env.SANITY_STUDIO_PROJECT_ID || ''
-const dataset = process.env.SANITY_STUDIO_DATASET || ''
-
-if (!projectId || !dataset) {
-  // This makes the build fail with a CLEAR message instead of Rollup garbage
-  throw new Error(
-    'Missing SANITY_STUDIO_PROJECT_ID or SANITY_STUDIO_DATASET environment variables.'
-  )
-}
+// 👇 This path might be different in your repo.
+// If this import errors, I’ll tell you the exact correct path after you check step 3.
+import {schemaTypes} from './schemaTypes'
 
 export default defineConfig({
   name: 'default',
   title: 'HyveConnect',
-  projectId,
-  dataset,
+  projectId: process.env.SANITY_STUDIO_PROJECT_ID || 'khg0m9lx',
+  dataset: process.env.SANITY_STUDIO_DATASET || 'production',
+
   plugins: [deskTool()],
-  basePath: '/',
+
+  schema: {
+    types: schemaTypes,
+  },
 })
