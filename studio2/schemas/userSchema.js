@@ -3,6 +3,12 @@ export default {
   title: 'User',
   type: 'document',
   fields: [
+   {
+  name: 'createdAt',
+  title: 'Created At',
+  type: 'datetime',
+  readOnly: true,
+    },
     {
       name: 'walletAddress',
       title: 'Wallet Address',
