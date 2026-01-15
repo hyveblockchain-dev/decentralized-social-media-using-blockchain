@@ -1,23 +1,26 @@
-export const tweetSchema = {
-    name: 'tweets',
-    type: 'document',
-    title: 'Tweets',
-    fields: [
-      {
-        name: 'tweet',
-        type: 'string',
-        title: 'Tweet',
-      },
-      {
-        name: 'timestamp',
-        type: 'datetime',
-        title: 'Timestamp',
-      },
-      {
-        name: 'author',
-        title: 'Author',
-        type: 'reference',
-        to: [{ type: 'users' }],
-      },
-    ],
-  }
+export default {
+  name: 'tweets',
+  title: 'Tweet',
+  type: 'document',
+  fields: [
+    {
+      name: 'tweet',
+      title: 'Tweet',
+      type: 'string',
+      validation: (Rule) => Rule.required().min(1).max(280),
+    },
+    {
+      name: 'timestamp',
+      title: 'Timestamp',
+      type: 'datetime',
+      validation: (Rule) => Rule.required(),
+    },
+    {
+      name: 'author',
+      title: 'Author',
+      type: 'reference',
+      to: [{ type: 'users' }],
+      validation: (Rule) => Rule.required(),
+    },
+  ],
+}
